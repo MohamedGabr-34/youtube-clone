@@ -8,10 +8,12 @@ function SearchFeed() {
   const [videos, setvideos] = useState([]);
   const { searchterm } = useParams();
   useEffect(() => {
-    fetchFromApi(`search?part=snippet&q=${searchterm}`).then((data) => {
-      setvideos(data.items);
-      console.log(data);
-    });
+    fetchFromApi(`search?part=snippet&q=${searchterm}&maxResults=20`).then(
+      (data) => {
+        setvideos(data.items);
+        console.log(data);
+      }
+    );
   }, [searchterm]);
   return (
     <Box p={2} minHeight="95vh">

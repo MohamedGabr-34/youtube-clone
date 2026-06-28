@@ -16,9 +16,15 @@ function VideoDetail() {
       setvideoDetails(data.items[0]);
     });
 
-    fetchFromApi(`search?part=snippet&relatedToVideoId=${id}&type=video`).then(
-      (data) => setvideos(data.items)
-    );
+    // first get video details
+    fetchFromApi(`videos?part=snippet,statistics&id=${id}`).then((data) => {
+      setvideoDetails(data.items[0]);
+      // then search related by title
+      const title = data.items[0]?.snippet?.title;
+      fetchFromApi(`search?part=snippet&q=${title}&maxResults=15`).then(
+        (data) => setvideos(data.items)
+      );
+    });
   }, [id]);
 
   if (!videoDetails?.snippet) {

@@ -1,19 +1,12 @@
 import axios from 'axios';
 
-// let path =
-//   '/search?relatedToVideoId=7ghhRHRP6t4&part=id%2Csnippet&type=video&maxResults=50';
-export const baseUrl = 'https://youtube-v31.p.rapidapi.com';
+export const baseUrl = 'https://www.googleapis.com/youtube/v3';
 
-const options = {
-  headers: {
-    'x-rapidapi-key': process.env.REACT_APP_Y3_KEY,
-    'x-rapidapi-host': 'youtube-v31.p.rapidapi.com',
-  },
-};
 export const fetchFromApi = async (url) => {
   try {
-    const { data } = await axios.get(`${baseUrl}/${url}`, options);
-
+    const { data } = await axios.get(
+      `${baseUrl}/${url}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
+    );
     return data;
   } catch (error) {
     console.log(error);

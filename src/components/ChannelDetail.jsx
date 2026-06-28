@@ -13,11 +13,11 @@ function ChannelDetail() {
     fetchFromApi(`channels?part=snippet&id=${id}`).then((data) => {
       setchannelDetail(data?.items[0]);
     });
-    fetchFromApi(`search?channelId=${id}&part=snippet%2Cid&order=date`).then(
-      (videosData) => {
-        setviedos(videosData?.items);
-      }
-    );
+    fetchFromApi(
+      `search?channelId=${id}&part=snippet,id&order=date&maxResults=20`
+    ).then((videosData) => {
+      setviedos(videosData?.items);
+    });
   }, [id]);
 
   return (
